@@ -39,7 +39,6 @@ class JavapCommand(sublime_plugin.TextCommand):
 
 	def get_javap_exec(self):
 		os_alias = platform.system().lower()
-		jad_location = self.view.settings().get('jad_location')
 		if 'win32' in os_alias:
 			return 'javap.exe'
 		elif 'linux' in os_alias:
