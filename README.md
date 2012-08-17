@@ -16,7 +16,7 @@ Go to your Sublime Packages folder and clone this repository there:
 Usage
 =====
 
-Open a class file in Sublime (tip: by default class files are ignored by Sublime - open `Prefrences -> Settings Default`, and search for `"file_exclude_patterns"` to remove `.class` files from the exclusion list). Then run the `Javap decompilation` command from your command pane.
+Open a class file in Sublime (tip: by default class files are ignored by Sublime - open `Preferences -> Settings Default`, and search for `"file_exclude_patterns"` to remove `.class` files from the exclusion list). Then run the `Javap decompilation` command from your command pane.
 The `javap` output will be shown in a new window.
 
 To set up a keybinding, add the following line to your keybindings:
