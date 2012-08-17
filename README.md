@@ -2,6 +2,7 @@ sublime-javap
 =============
 
 Javap support for the Sublime Text 2 editor.
+Presents JVM classfiles in a readable format - ideal for viewing your bytecode.
 
 
 Installation
