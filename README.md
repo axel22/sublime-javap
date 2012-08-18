@@ -5,6 +5,12 @@ Javap support for the Sublime Text 2 editor.
 Presents JVM classfiles in a readable format - ideal for viewing your bytecode.
 
 
+Prerequisites
+=============
+
+JDK installed - `javap` must be available from the command line.
+
+
 Installation
 ============
 
