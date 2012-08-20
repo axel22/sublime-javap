@@ -7,6 +7,7 @@ class JavapCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit):
 		filename = self.view.file_name()
+		print filename
 		decompiled, errormessages = self.decompile(filename)
 		print errormessages
 		self.push_to_new_window(edit, decompiled, filename)
@@ -32,6 +33,7 @@ class JavapCommand(sublime_plugin.TextCommand):
 		new_view = self.view.window().new_file()
 		new_view.set_name(self.get_new_filename(filename))
 		new_view.insert(edit, 0, contents)
+		new_view.set_scratch(1)
 		new_view.set_syntax_file('Packages/Java/Java.tmLanguage')
 
 	def get_new_filename(self, filename):
