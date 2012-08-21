@@ -10,11 +10,11 @@ class JavapCommand(sublime_plugin.TextCommand):
 		print filename
 		decompiled, errormessages = self.decompile(filename)
 		print errormessages
-		self.push_to_new_window(edit, decompiled, filename)
+		self.edit_window(edit, decompiled, filename)
 
 	def decompile(self, filename):
 		executable = self.get_javap_exec()
-		filepath, extension =  os.path.splitext(filename)
+		filepath, extension = os.path.splitext(filename)
 		print 'Detected extension:'
 		print extension
 		basename = os.path.basename(filepath)
@@ -29,12 +29,12 @@ class JavapCommand(sublime_plugin.TextCommand):
 		out, err = p.communicate()
 		return (out, err)
 
-	def push_to_new_window(self, edit, contents, filename):
-		new_view = self.view.window().new_file()
-		new_view.set_name(self.get_new_filename(filename))
-		new_view.insert(edit, 0, contents)
-		new_view.set_scratch(1)
-		new_view.set_syntax_file('Packages/Java/Java.tmLanguage')
+	def edit_window(self, edit, contents, filename):
+		view = self.view
+		view.erase(edit, sublime.Region(0, view.size()))
+		view.insert(edit, 0, contents)
+		view.set_scratch(1)
+		view.set_syntax_file('Packages/Java/Java.tmLanguage')
 
 	def get_new_filename(self, filename):
 		return filename.replace("class", "java")
@@ -47,3 +47,15 @@ class JavapCommand(sublime_plugin.TextCommand):
 			return 'javap'
 		elif 'darwin' in os_alias:
 			return 'javap'
+
+
+class OpenClassFileCommand(sublime_plugin.EventListener):
+
+	def on_load(self, view):
+		filename = view.file_name()
+		extension = os.path.splitext(filename)[1]
+		if extension == ".class":
+			view.run_command("javap")
+
+
+
