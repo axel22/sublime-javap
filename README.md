@@ -14,7 +14,9 @@ JDK installed - `javap` must be available from the command line.
 Installation
 ============
 
-Go to your Sublime Packages folder and clone this repository there:
+Through the package control plugin - run the `Install package` command and search for `Javap`.
+
+OR, go to your Sublime Packages folder and clone this repository there:
 
     cd ~/Library/Application Support/Sublime Text 2/
     git clone git://github.com/axel22/sublime-javap.git sublime-javap
