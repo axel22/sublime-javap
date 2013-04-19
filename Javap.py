@@ -41,6 +41,7 @@ class JavapCommand(sublime_plugin.TextCommand):
 
 	def get_javap_exec(self):
 		os_alias = platform.system().lower()
+		print os_alias
 		if 'windows' in os_alias:
 			return 'javap.exe'
 		elif 'linux' in os_alias:
@@ -57,5 +58,9 @@ class OpenClassFileCommand(sublime_plugin.EventListener):
 		if extension == ".class":
 			view.run_command("javap")
 
+	def on_activated(self, view):
+		header = view.substr(sublime.Region(0, 9))
+		if header == "cafe babe":
+			self.on_load(view)
 
 
