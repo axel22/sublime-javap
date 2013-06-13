@@ -25,7 +25,9 @@ class JavapCommand(sublime_plugin.TextCommand):
 		return self.exec_command(command)
 
 	def exec_command(self, command):
-		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		startupinfo = subprocess.STARTUPINFO()
+		startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=startupinfo)
 		out, err = p.communicate()
 		return (out, err)
 
