@@ -25,11 +25,17 @@ class JavapCommand(sublime_plugin.TextCommand):
 		return self.exec_command(command)
 
 	def exec_command(self, command):
-		startupinfo = subprocess.STARTUPINFO()
-		startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=startupinfo)
-		out, err = p.communicate()
-		return (out, err)
+		os_alias = platform.system().lower()
+		if 'windows' in os_alias:
+			startupinfo = subprocess.STARTUPINFO()
+			startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+			p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=startupinfo)
+			out, err = p.communicate()
+			return (out, err)
+		else:
+			p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+			out, err = p.communicate()
+			return (out, err)
 
 	def edit_window(self, edit, contents, filename):
 		view = self.view
