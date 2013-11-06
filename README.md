@@ -37,6 +37,9 @@ To set up a keybinding for this, add the following line to your keybindings:
 
     { "keys": ["ctrl+c", "ctrl+j", "ctrl+p"], "command": "javap" },
 
+Additionally, whenever you open a `jar` file, instead of displaying the binary, this plugin will automatically
+display the contents of the `jar`.
+
 
 License
 =======
