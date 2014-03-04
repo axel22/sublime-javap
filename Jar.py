@@ -56,9 +56,10 @@ class OpenClassFileCommand(sublime_plugin.EventListener):
 
 	def on_load(self, view):
 		filename = view.file_name()
-		extension = os.path.splitext(filename)[1]
-		if extension == ".jar":
-			view.run_command("jar")
+		if filename is not None:
+			extension = os.path.splitext(filename)[1]
+			if extension == ".jar":
+				view.run_command("jar")
 
 	def on_activated(self, view):
 		self.on_load(view)
