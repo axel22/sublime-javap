@@ -1,7 +1,7 @@
 sublime-javap
 =============
 
-Javap support for the Sublime Text 2 editor.
+Javap support for the Sublime Text 2/3 editor -- now Sublime Text 3 ready!
 Presents JVM classfiles in a readable format - ideal for viewing your bytecode.
 
 
@@ -44,7 +44,7 @@ display the contents of the `jar`.
 License
 =======
 
-Copyright (c) 2014, Aleksandar Prokopec
+Copyright (c) 2014, Aleksandar Prokopec,
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
