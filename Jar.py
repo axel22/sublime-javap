@@ -7,21 +7,21 @@ class JarCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit):
 		filename = self.view.file_name()
-		print filename
+		print(filename)
 		decompiled, errormessages = self.decompile(filename)
-		print errormessages
+		print(errormessages)
 		self.edit_window(edit, decompiled, filename)
 
 	def decompile(self, filename):
 		executable = self.get_jar_exec()
 		filepath, extension = os.path.splitext(filename)
-		print 'Detected extension:'
-		print extension
+		print('Detected extension:')
+		print(extension)
 		basename = os.path.basename(filepath)
 		dirname = os.path.dirname(filepath)
 		command = [executable, 'tfv', filename]
-		print 'Executing:'
-		print command
+		print('Executing:')
+		print(command)
 		return self.exec_command(command)
 
 	def exec_command(self, command):
@@ -34,8 +34,8 @@ class JarCommand(sublime_plugin.TextCommand):
 	def edit_window(self, edit, contents, filename):
 		view = self.view
 		view.erase(edit, sublime.Region(0, view.size()))
-		view.insert(edit, 0, contents)
-		view.set_scratch(1)
+		view.insert(edit, 0, contents.decode("utf-8"))
+		view.set_scratch(True)
 		#view.set_syntax_file('Packages/Java/Java.tmLanguage')
 
 	def get_new_filename(self, filename):
@@ -43,7 +43,7 @@ class JarCommand(sublime_plugin.TextCommand):
 
 	def get_jar_exec(self):
 		os_alias = platform.system().lower()
-		print os_alias
+		print(os_alias)
 		if 'windows' in os_alias:
 			return 'jar.exe'
 		elif 'linux' in os_alias:
