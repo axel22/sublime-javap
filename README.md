@@ -18,8 +18,9 @@ Through the package control plugin - run the `Install package` command and searc
 
 OR, go to your Sublime Packages folder and clone this repository there:
 
-    cd ~/Library/Application Support/Sublime Text 2/
+    cd ~/Library/Application Support/Sublime Text 3/Packages/
     git clone git://github.com/axel22/sublime-javap.git sublime-javap
+    git checkout st3
 
 Usage
 =====
