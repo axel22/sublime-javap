@@ -33,18 +33,20 @@ class JavapCommand(sublime_plugin.TextCommand):
 			p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=startupinfo)
 			out, err = p.communicate()
 			print('Command executed')
-			return (out, err)
+			fixed = out.decode("utf-8").replace('\r\n', '\n')
+			return (fixed, err)
 		else:
 			p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 			out, err = p.communicate()
 			print('Command executed')
-			return (out, err)
+			fixed = out.decode("utf-8")
+			return (fixed, err)
 
 	def edit_window(self, edit, contents, filename):
 		view = self.view
 		view.erase(edit, sublime.Region(0, view.size()))
 		print(type(contents))
-		view.insert(edit, 0, contents.decode("utf-8"))
+		view.insert(edit, 0, contents)
 		view.set_scratch(True)
 		view.set_syntax_file('Packages/Java/Java.tmLanguage')
 
