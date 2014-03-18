@@ -7,21 +7,22 @@ class JavapCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit):
 		filename = self.view.file_name()
-		print filename
+		print(filename)
 		decompiled, errormessages = self.decompile(filename)
-		print errormessages
+		print(errormessages)
+		print('Editing window')
 		self.edit_window(edit, decompiled, filename)
 
 	def decompile(self, filename):
 		executable = self.get_javap_exec()
 		filepath, extension = os.path.splitext(filename)
-		print 'Detected extension:'
-		print extension
+		print('Detected extension:')
+		print(extension)
 		basename = os.path.basename(filepath)
 		dirname = os.path.dirname(filepath)
 		command = [executable, '-c', '-l', '-private', '-verbose', '-classpath', dirname, basename]
-		print 'Executing:'
-		print command
+		print('Executing:')
+		print(command)
 		return self.exec_command(command)
 
 	def exec_command(self, command):
@@ -31,17 +32,20 @@ class JavapCommand(sublime_plugin.TextCommand):
 			startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
 			p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, startupinfo=startupinfo)
 			out, err = p.communicate()
+			print('Command executed')
 			return (out, err)
 		else:
 			p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 			out, err = p.communicate()
+			print('Command executed')
 			return (out, err)
 
 	def edit_window(self, edit, contents, filename):
 		view = self.view
 		view.erase(edit, sublime.Region(0, view.size()))
-		view.insert(edit, 0, contents)
-		view.set_scratch(1)
+		print(type(contents))
+		view.insert(edit, 0, contents.decode("utf-8"))
+		view.set_scratch(True)
 		view.set_syntax_file('Packages/Java/Java.tmLanguage')
 
 	def get_new_filename(self, filename):
@@ -49,7 +53,7 @@ class JavapCommand(sublime_plugin.TextCommand):
 
 	def get_javap_exec(self):
 		os_alias = platform.system().lower()
-		print os_alias
+		print(os_alias)
 		if 'windows' in os_alias:
 			return 'javap.exe'
 		elif 'linux' in os_alias:
