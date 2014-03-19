@@ -1,7 +1,7 @@
 sublime-javap
 =============
 
-Javap support for the Sublime Text 2 editor.
+Javap support for the Sublime Text 2 editor (for Sublime Text 3, see the `st3` branch).
 Presents JVM classfiles in a readable format - ideal for viewing your bytecode.
 
 
