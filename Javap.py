@@ -7,6 +7,7 @@ class JavapCommand(sublime_plugin.TextCommand):
 
 	def run(self, edit):
 		filename = self.view.file_name()
+		print(self)
 		print(filename)
 		decompiled, errormessages = self.decompile(filename)
 		print(errormessages)
@@ -44,11 +45,12 @@ class JavapCommand(sublime_plugin.TextCommand):
 
 	def edit_window(self, edit, contents, filename):
 		view = self.view
-		view.erase(edit, sublime.Region(0, view.size()))
-		print(type(contents))
-		view.insert(edit, 0, contents)
-		view.set_scratch(True)
-		view.set_syntax_file('Packages/Java/Java.tmLanguage')
+		window = sublime.active_window()
+		if view != window.transient_view_in_group(window.active_group()):
+			view.set_scratch(True)
+			view.set_syntax_file('Packages/Java/Java.tmLanguage')
+			view.erase(edit, sublime.Region(0, view.size()))
+			view.insert(edit, 0, contents)
 
 	def get_new_filename(self, filename):
 		return filename.replace("class", "java")
