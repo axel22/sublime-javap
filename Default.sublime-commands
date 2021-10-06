@@ -1,6 +1,0 @@
-[
-    {
-        "caption": "Javap decompilation",
-        "command": "javap"
-    }
-]
